@@ -1,0 +1,63 @@
+user nginx;
+worker_processes  auto;
+error_log /var/log/nginx/error.log;
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+include /etc/nginx/conf.d/*.conf;
+
+#pid        logs/nginx.pid;
+
+
+events {
+   worker_connections  1024;
+}
+
+
+http {
+   log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                     '$status $body_bytes_sent "$http_referer" '
+                     '"$http_user_agent" "$http_x_forwarded_for"';
+
+   access_log  /var/log/nginx/access.log  main;
+
+   # define ldap server
+   ldap_server domain_west {
+
+     # user search base.
+     url "{{ ldap_url }}"; 
+     binddn "{{ bind_user }}";
+     binddn_passwd "{{ bing_pw }}";
+     group_attribute member;
+     group_attribute_is_dn on;
+     satisfy any;
+     require group "{{ domain_users }}";
+     require group "{{ svc_api_test }}"; 
+     connections 500;
+     # list of allowed users
+     # require 'valid_user' cannot be used together with 'user' as valid user is a superset
+     # require valid_user;
+     # require user "CN=Batman,OU=Users,OU=New York Office,OU=Offices,DC=company,DC=com";
+     # require user "CN=Robocop,OU=Users,OU=New York Office,OU=Offices,DC=company,DC=com";
+   }
+upstream app {
+  server "{{ app_url }}";
+}
+
+
+server {
+ listen       80;
+ server_name  _;
+
+   # adding ldap authentication
+   auth_ldap "Forbidden";
+   auth_ldap_servers domain_west;
+
+   location / {
+     proxy_pass         http://app;
+     proxy_set_header   Host $host;
+     proxy_buffering    on;
+
+  }
+ }
+}

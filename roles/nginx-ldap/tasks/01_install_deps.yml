@@ -1,0 +1,21 @@
+---
+
+- name: Install EPEL
+  yum:
+    name: epel-release
+    state: latest
+
+- name: Install compiling tools
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ packages }}"
+
+- name: config nginx usr grp
+  user:
+    name: nginx
+    state: present
+    shell: /sbin/nologin
+    system: yes
+    createhome: yes
+    home: /var/lib/nginx

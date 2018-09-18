@@ -1,0 +1,21 @@
+---
+
+- name: Config nginx with ldap-auth
+  command: './configure {{ compile_with_ldap }}'
+  args:
+    chdir: "/opt/nginx-{{ nginx_release }}"
+
+- name: Install nginx
+  shell: make install
+  args:
+    chdir: "/opt/nginx-{{ nginx_release }}"
+  
+- name: Copy service file
+  copy:
+    src: nginx.service
+    dest: /usr/lib/systemd/system/nginx.service
+
+- name: Daemon reload
+  systemd:
+    daemon_reload: yes
+
