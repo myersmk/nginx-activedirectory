@@ -1,7 +1,6 @@
 ---
 # vars file for nginx-src
 
-nginx_release: '1.15.3'
 
 
 packages:

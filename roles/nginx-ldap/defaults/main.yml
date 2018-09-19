@@ -2,15 +2,10 @@
 # defaults file for nginx-src
 
 nginx_release: '1.15.3'
-
 ldap_url: "ldap://domain.com:389/CN=Users,DC=domain,DC=com?sAMAccountName?sub?"
-
 bind_user: "CN=svc.ldapreadonly,CN=Users,DC=domain,DC=com"
-
 bind_pw: "password"
-
 domain_users: "Domain Users"
-
 svc_api_group: "svc_api_test"
 
 app_url: "app.domain.com:8080"
