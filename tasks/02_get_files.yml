@@ -17,3 +17,4 @@
     repo: "https://github.com/kvspb/nginx-auth-ldap.git"
     dest: "/opt/nginx-{{ nginx_release }}/nginx-auth-ldap"
     clone: yes
+    version: master

@@ -6,7 +6,7 @@
     chdir: "/opt/nginx-{{ nginx_release }}"
 
 - name: Install nginx
-  shell: make install
+  command: 'make install'
   args:
     chdir: "/opt/nginx-{{ nginx_release }}"
 
