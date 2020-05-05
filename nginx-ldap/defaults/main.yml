@@ -1,4 +1,5 @@
 ---
+# defaults file for nginx-src
 
 nginx_release: '1.17.10'
 
@@ -12,8 +13,6 @@ bind_pw: "password"
 
 domain_users: "Domain Users"
 
-svc_api_group: "svc_api_test"
+svc_api_group: "svc_api_group"
 
 app_url: "app.domain.com:8080"
-
-

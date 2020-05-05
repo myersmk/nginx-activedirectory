@@ -1,6 +1,0 @@
----
-
-- name: COMPILE NGINX WITH LDAP
-  hosts: nginx
-  roles:
-    - roles/nginx-ldap
