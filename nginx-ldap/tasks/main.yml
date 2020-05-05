@@ -1,6 +1,0 @@
----
-# tasks file for nginx-src
-- include_tasks: 01_install_deps.yml
-- include_tasks: 02_get_files.yml
-- include_tasks: 03_compile_source.yml
-- include_tasks: 04_nginx_conf_template.yml
