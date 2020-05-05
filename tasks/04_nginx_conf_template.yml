@@ -1,0 +1,24 @@
+---
+
+- name: Copy nginx conf template
+  template:
+    src: "nginx.conf.j2"
+    dest: "/etc/nginx/nginx.conf"
+    backup: yes
+    owner: nginx
+    group: nginx
+
+- name: firewalld rules
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  with_items:
+    - ldaps
+    - ldap
+
+- name: start nginx
+  systemd:
+    name: nginx
+    state: restarted

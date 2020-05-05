@@ -1,0 +1,14 @@
+setsebool -P domain_can_mmap_files 1
+
+
+semanage fcontext -a -t FILE_TYPE '/usr/share/p11-kit/modules/p11-kit-trust.module'
+FILE_TYPE is one of the following: abrt_helper_exec_t, file_context_t, fonts_cache_t, fonts_t, ld_so_cache_t, ld_so_t, lib_t
+
+restorecon -v '/usr/share/p11-kit/modules/p11-kit-trust.module'
+
+
+ausearch -c 'pdns_server' --raw | audit2allow -M my-pdnsserver
+semodule -X 300 -i my-pdnsserver.pp
+
+Username: admin
+Current password: ek33GKFUtenC

@@ -1,0 +1,19 @@
+---
+
+- name: Download nginx source
+  get_url:
+    url: "http://nginx.org/download/nginx-{{ nginx_release }}.tar.gz"
+    dest: /opt/
+
+- name: unarchive tar
+  unarchive:
+    src: "/opt/nginx-{{ nginx_release }}.tar.gz"
+    dest: "/opt/"
+    copy: no
+#    remote_src: yes
+
+- name: clone nginx LDAP auth
+  git:
+    repo: "https://github.com/kvspb/nginx-auth-ldap.git"
+    dest: "/opt/nginx-{{ nginx_release }}/nginx-auth-ldap"
+    clone: yes
