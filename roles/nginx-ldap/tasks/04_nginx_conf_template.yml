@@ -8,6 +8,16 @@
     owner: nginx
     group: nginx
 
+- name: firewalld rules
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  with_items:
+    - ldaps
+    - ldap
+
 - name: start nginx
   systemd:
     name: nginx

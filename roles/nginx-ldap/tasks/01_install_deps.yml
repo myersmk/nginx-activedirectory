@@ -7,9 +7,9 @@
 
 - name: Install compiling tools
   yum:
-    name: "{{ item }}"
+    name: "{{ packages }}"
     state: latest
-  with_items: "{{ packages }}"
+  #with_items: "{{ packages }}"
 
 - name: config nginx usr grp
   user:

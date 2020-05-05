@@ -1,6 +1,8 @@
 ---
 
-nginx_release: '1.15.3'
+nginx_release: '1.17.10'
+
+nginx_link_addr: 'https://nginx.org/download/nginx-1.17.10.tar.gz'
 
 ldap_url: "ldap://domain.com:389/CN=Users,DC=domain,DC=com?sAMAccountName?sub?"
 

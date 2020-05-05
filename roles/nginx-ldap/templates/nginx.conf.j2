@@ -27,12 +27,12 @@ http {
      # user search base.
      url "{{ ldap_url }}"; 
      binddn "{{ bind_user }}";
-     binddn_passwd "{{ bing_pw }}";
+     binddn_passwd "{{ bind_pw }}";
      group_attribute member;
      group_attribute_is_dn on;
      satisfy any;
      require group "{{ domain_users }}";
-     require group "{{ svc_api_test }}"; 
+     require group "{{ svc_api_group }}"; 
      connections 500;
      # list of allowed users
      # require 'valid_user' cannot be used together with 'user' as valid user is a superset
@@ -40,6 +40,7 @@ http {
      # require user "CN=Batman,OU=Users,OU=New York Office,OU=Offices,DC=company,DC=com";
      # require user "CN=Robocop,OU=Users,OU=New York Office,OU=Offices,DC=company,DC=com";
    }
+   
 upstream app {
   server "{{ app_url }}";
 }
